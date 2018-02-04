@@ -2,6 +2,9 @@ public class Recursion{
    
 
     public int fact (int n){
+	if( n < 0){
+	    throw new IllegalArgumentException();
+	}
 	if(n == 0){
 	    return 1;
 	}
@@ -9,6 +12,9 @@ public class Recursion{
     }
 
     public int fib(int n){
+	if( n < 0){
+	    throw new IllegalArgumentException();
+	}
 	return fibHelp(n, 0 , 1);
 
     }
@@ -26,6 +32,9 @@ public class Recursion{
 
 
     public double sqrt(double n){
+	if( n < 0){
+	    throw new IllegalArgumentException();
+	}
 	return sqrtHelper(n, 5.0);
     }
     
