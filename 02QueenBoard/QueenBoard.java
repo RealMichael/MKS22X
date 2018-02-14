@@ -154,7 +154,7 @@ public class QueenBoard{
 	return sumStart;
     }
 
-    
+    /*
     public static void main(String[] args){
 	QueenBoard ab = new QueenBoard(5);
 		//	ab.addQueen(4,5);
@@ -173,4 +173,5 @@ public class QueenBoard{
     }
 }
     
-
+*/
+}
