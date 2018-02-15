@@ -53,6 +53,24 @@ public class QueenBoard{
     }
     
     //SAFE FUNCTION
+    /*
+    public boolean safe(int r, int c){
+	int bound = r + c;
+	for(int i = c, x = r , y = c; c - i < c && x >= b; i --){
+	    if(board[r][c - i] == -1){
+		return false;
+	    }
+	}
+      
+		return true;
+    }
+	    
+
+
+    */
+
+
+
     
     public boolean safe(int r, int c){
 	if(board[r][c] == -1){
@@ -63,13 +81,14 @@ public class QueenBoard{
 		return false;
 	    }
 	}
-	for(int a = r , b = c ; b >= 0 && a >= board.length - 1; a -- , b --){
+	
+	for(int a = r , b = c ; b >= 0 && a <= board.length - 1; a ++ , b --){
 	    if (board[a][b] == -1){
 		return false;
 	    }
 	}
 
-
+	
 	for(int y = r , z = c ; y >= 0 && z >= 0; y -- , z --){
 	    if (board[y][z] == -1){
 		return false;
@@ -77,7 +96,7 @@ public class QueenBoard{
 	}
 	return true;
     }
-
+    
     //SOLVE
     
     public boolean solve(){	 
@@ -111,7 +130,7 @@ public class QueenBoard{
 	return false;
     }
   
-    public int count(){
+    public int countSolutions(){
 		for(int x = 0;x < board.length; x ++){
 	    for(int y = 0;y < board[x].length; y ++){
 		if (board[x][y] != 0){
@@ -153,10 +172,40 @@ public class QueenBoard{
 	
 	return sumStart;
     }
+   
 
-    /*
+ /*
+public static void main(String[] args){
+    QueenBoard b = new QueenBoard(4);
+    System.out.println(b.solve()); //prints true
+    System.out.println(b); //prints a valid solution
+    try{
+      b.solve();
+    }catch(IllegalStateException e){
+      System.out.println("Error: The board contains non-zero values");
+    } //prints "Error: The board contains non-zero values"
+    try{
+      b.count();
+    }catch(IllegalStateException e){
+      System.out.println("Error: The board contains non-zero values");
+    } //prints "Error: The board contains non-zero values"
+    for (int i = 0; i < 12; i++){
+      QueenBoard a = new QueenBoard(i);
+      System.out.println("# of Solutions for " + i + ": " + a.count());
+      /*          Expected Values
+       i --> # of Solutions   i --> # of Solutions
+      0 --> 1                      6 --> 4
+      1 --> 1                      7 --> 40
+      2 --> 0                      8 --> 92
+      3 --> 0                      9 --> 352
+      4 --> 2                    10 --> 724
+      5 --> 10                  11 --> 2680
+      */ /*
+      System.out.println(a); //prints out an empty i by i grid of underscores
+      */
+      /* 
     public static void main(String[] args){
-	QueenBoard ab = new QueenBoard(5);
+	QueenBoard ab = new QueenBoard(7);
 		//	ab.addQueen(4,5);
 	//	ab.addQueen(1,1);
 	//	ab.addQueen(0,0);
@@ -171,7 +220,9 @@ public class QueenBoard{
 		System.out.println(ab.count());
 	//	System.out.println(ab.safe(0,2));
     }
+      */
 }
+
+
     
-*/
-}
+
