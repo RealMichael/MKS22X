@@ -106,7 +106,12 @@ public class Maze{
 	}
 	return false;
     }
-    
+    public boolean check(int x, int y){
+	if(maze[x][y] == ' ' || maze[x][y] == 'E'){
+	    return true;
+	}
+	return false;
+    }
     public int solve(){
 	//	int tracker = 0;
 	for(int i = 0; i < maze.length; i ++){
@@ -133,8 +138,10 @@ public class Maze{
 	    return moveNum;
 	}
 	for(int i = 0; i < xDirec.length; i ++){
-	    if(maze[row + xDirec[i]][col + yDirec[i]] == ' ' ||
-	        maze[row + xDirec[i]][col + yDirec[i]] == 'E'){
+	    int xMove = row + xDirec[i];
+	    int yMove = col + yDirec[i];
+	   
+	    if(check(xMove,yMove)){
 		maze[row][col] = '@';
 		/* solve(row + xDirec[i],col + y[Direc[i],moveNum + 1);
 		   return solve(row + xDirec[i],col + y[Direc[i],moveNum + 1);
@@ -170,5 +177,6 @@ public class Maze{
     
     */
 }
+
 
 
