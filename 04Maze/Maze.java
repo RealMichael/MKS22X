@@ -136,7 +136,9 @@ public class Maze{
 	    if(maze[row + xDirec[i]][col + yDirec[i]] == ' ' ||
 	        maze[row + xDirec[i]][col + yDirec[i]] == 'E'){
 		maze[row][col] = '@';
-		
+		/* solve(row + xDirec[i],col + y[Direc[i],moveNum + 1);
+		   return solve(row + xDirec[i],col + y[Direc[i],moveNum + 1);
+		*/
 		tracker = solve(row + xDirec[i],col + yDirec[i],moveNum + 1,tracker);
 		if(	safe(tracker)){
 			return tracker;
