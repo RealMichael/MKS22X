@@ -131,8 +131,12 @@ public class USACO{
 	String[] seValues = startEnd.split(" ");
 	int r1 = Integer.parseInt(seValues[0]);
 	int c1 = Integer.parseInt(seValues[1]);
-	int r2 = Integer.parseInt(seValues[2]) - 1;
-	int c2 = Integer.parseInt(seValues[3]) - 1;
+	int r2 = Integer.parseInt(seValues[2]);
+	int c2 = Integer.parseInt(seValues[3]);
+	//	System.out.println(r1);
+	// 	System.out.println(c1);
+	    //	System.out.println(r2);
+	    //	System.out.println(c2);
 	int xMoves[] = new int[]{1,-1,0,0};
 	int yMoves[] = new int[]{0,0,1,-1};
 	int[][] moves = new int[row][col];
@@ -146,38 +150,53 @@ public class USACO{
 		    moves[r][c] = -1;
 		    movesDup[r][c] = -1;
 		}
-		
-	
 	    }
 	}
 	
 	for(int moveNum = 0; moveNum < seconds; moveNum ++){
-	     duplicate(moves,movesDup);
+	
 	    
 	    for(int r = 0; r < row; r ++){
 		for(int c = 0; c < col; c++){
-		    try{
+		    total = 0;
 		        if(field[r][c] != '*'){
 			    //  total = 0;
+			    
 			for(int i = 0; i < xMoves.length; i ++){
-			    if(moves[r + xMoves[i]][c + yMoves[i]] != -1  &&
-			    	       r + xMoves[i] > 0 && c + yMoves[i] > 0 && 
-				r + xMoves[i] <  moves.length &&
-			      c + yMoves[i] + 1 <  moves[0].length + 1){
+			    try{
+				if(moves[r + xMoves[i]][c + yMoves[i]] != -1
+				      &&
+				   //	   r + xMoves[i] > 0){
+// && c + yMoves[i] > 0
+				   
+				      r + xMoves[i] <  moves.length &&
+				       c + yMoves[i] + 1 <  moves[0].length + 1){
+			       
+
 				total += moves[r + xMoves[i]][c + yMoves[i]];
 			
 			    }
+			    }
+			    catch(IndexOutOfBoundsException e){}
+			}
+			
+		
 			}
 			movesDup[r][c] = total;
-				total = 0;
-		    }
-		    }
-		    catch(IndexOutOfBoundsException e){}
+		       
+			
+		
+		
+		    
+	    
+		
 		}
 	    }
+	    duplicate(moves,movesDup);
 	}
     
-	//     return movesDup[r2][c2];
+    
+	
     
 	    
 		
@@ -192,11 +211,33 @@ public class USACO{
 		}
 	    }
 	}
-	//	System.out.println(result);
+		String result2 = "";
+       	for(int i = 0; i  < moves.length; i ++){
+	    for(int c = 0; c < moves[i].length; c ++){
+		if(c != moves[i].length - 1){
+		    result += moves[i][c] +" " ;
+		}
+		if(c == moves[i].length - 1){
+		    result += moves[i][c] + "\n";
+		}
+	    }
+	}
+		String result3 = "";
+	for(int i = 0; i  < movesDup.length; i ++){
+	    for(int c = 0; c < movesDup[i].length; c ++){
+		if(c != movesDup[i].length - 1){
+		    result += movesDup[i][c] +" " ;
+		}
+		if(c == movesDup[i].length - 1){
+		    result += movesDup[i][c] + "\n";
+		}
+	    }
+	}
+	//	System.out.println(result3);
 		//	System.out.println(lake[3][5]);
 		//	return 1;
     
-		return movesDup[r2][c2];
+		return movesDup[r2 - 1][c2 - 1];
     }
 
 	public static void duplicate(int[][] x, int[][] y){
