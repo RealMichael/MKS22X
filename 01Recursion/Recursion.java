@@ -32,6 +32,9 @@ public class Recursion{
 
 
     public double sqrt(double n){
+	if (n == 0){
+	    return 0;
+	}
 	if( n < 0){
 	    throw new IllegalArgumentException();
 	}
@@ -39,6 +42,7 @@ public class Recursion{
     }
     
     public static double sqrtHelper(double n , double guess){
+	
 	double margin = 0.0000001;
 	if(Math.abs((guess * guess) - n) < margin){
 	    return guess;
@@ -49,10 +53,14 @@ public class Recursion{
 	
     }
 
-
-
+    /*
+    public static void main(String[] args){
+	Recursion ab = new Recursion();
+	System.out.println(ab.sqrt(0));
 
 	
 	
     
+    }
+    */
 }
