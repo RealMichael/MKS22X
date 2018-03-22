@@ -36,6 +36,39 @@ public class Quick{
 
 
     }
+
+    public static int[] partitionD(int[] data,int start, int end){
+	int lo = start;
+	int hi = end;
+	int i = start;
+	int rando = start + (int)(Math.random()*(((end) - start) + 1));
+	int piv = data[rando];
+	while(i <= hi){
+	    if(data[i] == piv){
+		i ++;
+	    }
+	    else if(data[i] > piv){
+		int te = data[i];
+		data[i] = data[hi];
+		data[hi] = te;
+		hi --;
+	    }
+	    else{
+		int pe = data[i];
+		data[i] = data[lo];
+		data[lo] = pe;
+		lo ++;
+		i ++;
+	    }
+	}
+	int[] values = new int[2];
+	values[0] = lo;
+	values[1] = hi;
+	return values;
+    }
+	       
+
+
     
     public static int quickselect(int[] data, int k){
 	return quickselect(data,k,0,data.length - 1);
@@ -43,16 +76,16 @@ public class Quick{
 
     public static int quickselect(int[] data, int k, int start,int end){
 	
-	int v2 = partition(data,start,end);
+	int[] v2 = partitionD(data,start,end);
 	try{
-	if(v2 == k){
-	    return data[v2];
+	if(v2[0] == k){
+	    return data[v2[1]];
 	}
-	if(v2 > k){
-	    return quickselect(data,k,start,v2 - 1);
+	if(v2[0] > k){
+	    return quickselect(data,k,start,v2[0]);
 	}
-	if(v2 < k){
-	    return quickselect(data,k,v2 + 1,end);
+	if(v2[0] < k){
+	    return quickselect(data,k,v2[1],end);
 	}
 	}
 	catch(ArrayIndexOutOfBoundsException e){}
@@ -76,13 +109,13 @@ public class Quick{
     public static void quicksort(int[] ary, int start, int end){
 
 	    while(start < end){
-	    int v1 = partition(ary,start,end);
+	    int[] v1 = partitionD(ary,start,end);
 	    
 	    //Sort both left and right to partition
 	     
-	    quicksort(ary,start,v1 - 1);
+	    quicksort(ary,start,v1[0] - 1);
 	    start ++;
-	    quicksort(ary,v1 + 1, end);
+	    quicksort(ary,v1[1] + 1, end);
         	end --;
 	   
 	}
@@ -90,20 +123,20 @@ public class Quick{
 	    
 
 
-    /*
+    
     public static void main(String[] args){
-	int[] tester = new int[] {2,10,15,23,0,5,99,5352};
+	int[] tester = new int[] {2,10,15,23,0,0,5,99,5352,1,1,1,1,2,2};
 	//	System.out.println(quickselect(tester,5));
 	//	System.out.println(quickselect(tester,0));
 	//	System.out.println(quickselect(tester,1));
 	//	System.out.println(quickselect(tester,2));
 	//	System.out.println(quickselect(tester,3));
 	//	System.out.println(quickselect(tester,4));
-	quicksort(tester);
+	//	System.out.println(quickselect(tester,2));
+		quicksort(tester);
 	System.out.println(toString(tester));
 		
 
 }
 }
-    */
-}
+    
