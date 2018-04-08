@@ -37,8 +37,8 @@ public class USACO{
 	    int highest = 0;
 	    for(int i = rowCorner; i < rowCorner + 3; i ++){
 		for(int c = colCorner ; c < colCorner + 3; c ++){
-		    if(lake[rowCorner][colCorner] > highest){
-			highest = lake[rowCorner][colCorner];
+		    if(lake[i][c] > highest){
+			highest = lake[i][c];
 		    
 		    }
 		}
@@ -60,13 +60,13 @@ public class USACO{
 	int finalDepth = 0;
 	for(int i = 0; i < lake.length; i ++){
 	    for(int x = 0; x < lake[i].length; x ++){
-		try{
+		
 		int currentDepth = finalEle - lake[i][x];
 		if(currentDepth > 0){
 		    finalDepth += currentDepth;
 		}
-		}
-		catch(ArrayIndexOutOfBoundsException e){}
+		
+	
 	    }
 
 	
@@ -248,16 +248,18 @@ public class USACO{
 	    }
 	}
 	// return movesDup[r2][c2];
+}
 
     /*
     public static void main(String[] args){
 	try{
 	    
-	    System.out.println(USACO.silver("ctravel2.in"));
+	    System.out.println(USACO.bronze("makelake.in"));
 	    //  System.out.println(toString(lake));
 	}
 	catch(FileNotFoundException e){}
     }
 }
     */
-}
+    
+
