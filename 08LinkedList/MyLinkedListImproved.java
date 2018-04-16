@@ -230,6 +230,15 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 	return res;
     }
+
+     public void extend(MyLinkedListImproved<T> other){
+	 Node lastOther = other.last;
+	 (other.first).setPrev(last);
+	 last.setNext(other.first);
+	 last = lastOther;
+	 length += other.size();
+	 other.clear();
+     }
     
        
 
@@ -297,13 +306,33 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	public T next(){
 	   
 	    
-	   
+	    if(hasNext() == true){
 	    T res = curNode.getValue();
 	    curNode = curNode.getNext();
 	    return res;
+	    }
+	      else{
+	    	throw new NoSuchElementException();
+	    	    }
 	}
 	  
     }
+
+    public static void main(String[] args){
+	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
+	MyLinkedListImproved<Integer> b = new MyLinkedListImproved<>();
+	a.add(1);
+	a.add(2);
+	a.add(5);
+	b.add(6);
+	b.add(4);
+	b.add(3);
+      	System.out.println(a.toString());
+       	System.out.println(b.toString());
+	a.extend(b);
+	System.out.println(a.toString());
+	//	System.out.println(b.toString());
+}
 }
 
 
