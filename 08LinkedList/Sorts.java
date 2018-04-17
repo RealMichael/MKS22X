@@ -13,16 +13,35 @@ public class Sorts{
 		//  	sor[0].add(4);
 		//	sor[1].add(1);
 		MyLinkedListImproved<Integer>  neg = new MyLinkedListImproved<>();
+		int counter = 0;
+		int counter2 = 0;
+		for(Integer i : data){
+		    if(i < 0){
+			counter ++;
+		    }
+		    if(i >= 0){
+			counter2 ++;
+		    }
+		}
+		if(counter > 0 && counter2 == 0){
+		    for(Integer i : data){
+			neg.add(i);
+			data.clear();
+		    }
+		}
+		else{
 		for(Integer i : data){
 		    if(i < 0){
 			neg.add(i);
 			data.remove(i);
 		    }
 		}
+		}
 		//	System.out.println(data);
 		//	System.out.println(neg);
 
 		//Negative part
+		if(neg.size() > 0){
 		int div2 = 0;
 		int ind2 = neg.min();
 		Integer minn = neg.get(ind2);
@@ -72,8 +91,9 @@ public class Sorts{
 			neg = temp2;
 			//	System.out.println(neg);
 
-
+		}
 		//Positive part
+		if(data.size() > 0){
 		for(Integer i : data){
 		    sor[i % 10].add(i);
 		}
@@ -148,8 +168,11 @@ public class Sorts{
 			   div ++;
 			   numDigit --;
 			}
+		}
 			// 	System.out.println(data.toString());
+		if(neg.size() > 0 && data.size() > 0){
 			neg.extend(data);
+		}
 			//	data = neg;
 
 			for(int i = 0; i < neg.size(); i ++){
@@ -158,13 +181,19 @@ public class Sorts{
 			//	System.out.println(data);
 		
     }
+    
+    public static void radixsortIncludingNegatives(MyLinkedListImproved<Integer> data){ 
+	radixsort(data);
+    }
 }
+
+
     /*
     public static void main(String[] args){
 	MyLinkedListImproved<Integer> a = new MyLinkedListImproved<>();
-	a.add(-1);
-	a.add(-25);
-	a.add(-8);
+		a.add(-1);
+		a.add(-25);
+	 	a.add(-8);
 	a.add(16);
 	a.add(22);
 	a.add(20);
@@ -174,14 +203,14 @@ public class Sorts{
 	a.add(7);
 	a.add(21);
 	a.add(210);
-	a.add(46);
-	a.add(984);
+ 	a.add(46);
+	//	a.add(984);
 	a.add(1021);
-       	a.add(-9876);
-       	a.add(-10000);
-	radixsort(a);
+		a.add(-9876);
+		a.add(-10000);
+	radixsortIncludingNegatives(a);
 	//	System.out.println((-405 % 10) * -1);
 	System.out.println(a.toString());
     }
 }
-    */   
+    */
