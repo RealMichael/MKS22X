@@ -1,13 +1,16 @@
 import java.util.*;
-public class MyHeap{
+public class MyHeap<T extends Comparable<T>>{
     private int length;
-    public String[] heap;
+    public T[] heap;
     public boolean isMax;
+
+    @SuppressWarnings("unchecked")
     public MyHeap(){
-	heap = new String[10];
+	heap = (T[]) new Comparable[10];
 	isMax = true;
     }
-
+    
+    @SuppressWarnings("unchecked")
     public MyHeap(boolean ya){
 	if(ya == true){
 	    isMax = true;
@@ -15,10 +18,10 @@ public class MyHeap{
 	else{
 	    isMax = false;
 	}
-	heap = new String[10];
+	heap = (T[])new Comparable[10];
     }
     
-    public void add(String s){
+    public void add(T s){
 	if(length == heap.length){
 	    resize();
 	}
@@ -27,7 +30,7 @@ public class MyHeap{
 	int ind = length;
 	if(isMax){
 	    while(((ind - 1) / 2 >= 0) && heap[(ind - 1)/2].compareTo(heap[ind]) < 0){
-		String temp = heap[ind];
+		T temp = heap[ind];
 		heap[ind] = heap[(ind - 1) / 2];
 		heap[(ind - 1) / 2] = temp;
 		ind = (ind - 1) / 2;
@@ -36,7 +39,7 @@ public class MyHeap{
 	}
 	else{
 	     while(((ind - 1) / 2 >= 0) && heap[(ind - 1)/2].compareTo(heap[ind]) > 0){
-		String temp = heap[ind];
+		T temp = heap[ind];
 		heap[ind] = heap[(ind - 1) / 2];
 		heap[(ind - 1) / 2] = temp;
 		ind = (ind - 1) / 2;
@@ -45,8 +48,8 @@ public class MyHeap{
 	length ++;
     }
 
-    public String remove(){
-	String res = heap[0];
+    public T remove(){
+	T res = heap[0];
 	heap[0] = heap[length - 1];
 	heap[length - 1] = null;
 	int ind = 0;
@@ -54,26 +57,26 @@ public class MyHeap{
 	if(isMax){
 	    while(((ind * 2) + 1 < length) && (ind * 2) + 2 < length){
 		if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
-		    String temp = heap[ind];
+		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 1];
 		    heap[(ind * 2) + 1] = temp;
 		    ind = (ind * 2) + 1;
 		}
 	       	if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
-		    String temp = heap[ind];
+		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 2];
 		    heap[(ind * 2) + 2] = temp;
 		    ind = (ind * 2) + 2;
 		}
 	       	if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
 		    if(heap[(ind * 2) + 1].compareTo(heap[(ind * 2) + 2]) >= 0){
-			String temp = heap[ind];
+			T temp = heap[ind];
 			heap[ind] = heap[(ind * 2) + 1];
 			heap[(ind * 2) + 1] = temp;
 			ind = (ind * 2) + 1;
 		    }
 		    else{
-			 String temp = heap[ind];
+			 T temp = heap[ind];
 			 heap[ind] = heap[(ind * 2) + 2];
 			 heap[(ind * 2) + 2] = temp;
 			 ind = (ind * 2) + 2;
@@ -101,14 +104,14 @@ public class MyHeap{
 	else{
 	     while(((ind * 2) + 1 < length) && (ind * 2) + 2 < length){
 		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
-		    String temp = heap[ind];
+		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 1];
 		    heap[(ind * 2) + 1] = temp;
 		    ind = (ind * 2) + 1;
 		}
 		 
 		 else  if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
-		    String temp = heap[ind];
+		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 2];
 		    heap[(ind * 2) + 2] = temp;
 		    ind = (ind * 2) + 2;
@@ -117,13 +120,13 @@ public class MyHeap{
 		 //	  if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
 		 else{
 		    if(heap[(ind * 2) + 1].compareTo(heap[(ind * 2) + 2]) <= 0){
-			String temp = heap[ind];
+			T temp = heap[ind];
 			heap[ind] = heap[(ind * 2) + 1];
 			heap[(ind * 2) + 1] = temp;
 			ind = (ind * 2) + 1;
 		    }
 		    else{
-			 String temp = heap[ind];
+			 T temp = heap[ind];
 			 heap[ind] = heap[(ind * 2) + 2];
 			 heap[(ind * 2) + 2] = temp;
 			 ind = (ind * 2) + 2;
@@ -164,8 +167,10 @@ public class MyHeap{
 	}
 	return ans + heap[heap.length - 1];
 }
+
+    @SuppressWarnings("unchecked")
     public void resize(){
-	String[] heap2 = new String[heap.length * 2];
+	T[] heap2 = (T[]) new Comparable[heap.length * 2];
 	for(int i = 0; i < length; i ++){
 	    heap2[i] = heap[i];
 	}
@@ -176,20 +181,22 @@ public class MyHeap{
 	return length;
     }
     
-    public String peek(){
+    public T peek(){
 	return heap[0];
     }
-	
-    /*
+    /*	
+    @SuppressWarnings("unchecked")
     public static void main(String[] args){
-	MyHeap ab = new MyHeap(true);
+	MyHeap ab = new MyHeap(false);
 	ab.add("ab");
 	//	ab.add("bc");
 	//  ab.add("ac");
 	  ab.remove();
 	  ab.add("zdgsh");
+	  ab.add("afaghaa");
 	System.out.println(ab.toString());
 }
 }
+    
     */
 }
