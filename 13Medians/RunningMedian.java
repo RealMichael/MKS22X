@@ -36,6 +36,15 @@ public class RunningMedian{
 	max.remove();
     }
     public void add(Double ele){
+// 	if(ele == 0.0){
+// 	    if(ele > getMedian()){
+// 		max.add(ele);
+// 	    }
+// 	    else{
+// 		min.add(ele);
+// 	    }
+// 	    return;
+// 	}
 	if(min.size() == 0 && max.size() == 0){
 	    max.add(ele);
 	}
@@ -114,20 +123,39 @@ public class RunningMedian{
     /*
     public static void main(String[] args){
 	RunningMedian ab = new RunningMedian();
-		ab.add(24.0);
+	//	ab.add(24.0);
+		ab.add(0.0);
+				ab.add(0.0);
+		ab.add(0.0);
+		ab.add(0.0);
+
        	ab.add(20.0);
 	ab.add(19.0);
-	ab.add(49.0);
-	ab.add(21000.0);
-		ab.add(21.0);
+		ab.add(49.0);
+	//	ab.add(21000.0);
+	//	ab.add(21.0);
 		ab.add(15.0);
-		//	ab.add(13.0);
+			ab.add(13.0);
+			ab.add(0.0);
+			ab.add(0.0);
+			ab.add(0.0);
+			ab.add(21.0);
+			ab.add(245.0);
+			ab.add(21.5334);
+			ab.add(0.0);
+			ab.add(0.0);
+			ab.add(0.0);
+			ab.add(21.0);
+			ab.add(21.0);
+			ab.add(10.0);
+			ab.add(5.0);
+
 	//	ab.removeMax();
 	System.out.println(ab.getMedian());
 	System.out.println(ab.toString());
     }
 }
-    */
+    */  
 	    
 	
 	
