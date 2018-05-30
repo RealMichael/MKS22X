@@ -55,20 +55,25 @@ public class MyHeap<T extends Comparable<T>>{
 	int ind = 0;
 	length = length - 1;
 	if(isMax){
+	    
 	    while(((ind * 2) + 1 < length) && (ind * 2) + 2 < length){
-		if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
+		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) >= 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) >= 0)){
+		     return res;
+		 }
+		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
 		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 1];
 		    heap[(ind * 2) + 1] = temp;
 		    ind = (ind * 2) + 1;
 		}
-	       	if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
+		 else if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
 		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 2];
 		    heap[(ind * 2) + 2] = temp;
 		    ind = (ind * 2) + 2;
-		}
-	       	if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
+		 }
+		 else{
+		     //	if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
 		    if(heap[(ind * 2) + 1].compareTo(heap[(ind * 2) + 2]) >= 0){
 			T temp = heap[ind];
 			heap[ind] = heap[(ind * 2) + 1];
@@ -83,31 +88,44 @@ public class MyHeap<T extends Comparable<T>>{
 		    }
 		}
 	    }
-	   //  while(((ind * 2) + 1 < length) && (ind * 2) + 2 >= length){
-// 	       	if((heap[ind].compareTo(heap[(ind * 2) + 1])) < 0){
-// 		    String temp = heap[ind];
-// 		    heap[ind] = heap[(ind * 2) + 1];
-// 		    heap[(ind * 2) + 1] = temp;
-// 		    ind = (ind * 2) + 1;
-// 		}
-// 	    }
-// 	     while(((ind * 2) + 1 >= length) && (ind * 2) + 2 < length){
-// 		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0)){
-// 		    String temp = heap[ind];
-// 		    heap[ind] = heap[(ind * 2) + 2];
-// 		    heap[(ind * 2) + 2] = temp;
-// 		    ind = (ind * 2) + 2;
+	
+	    while(((ind * 2) + 1 < length) && (ind * 2) + 2 >= length){
+	       	if((heap[ind].compareTo(heap[(ind * 2) + 1])) < 0){
+		    T temp = heap[ind];
+		    heap[ind] = heap[(ind * 2) + 1];
+		    heap[(ind * 2) + 1] = temp;
+		    ind = (ind * 2) + 1;
+		}
+		else{
+		    return res;
+		}
+	    }
+	     while(((ind * 2) + 1 >= length) && (ind * 2) + 2 < length){
+		 if((heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
+		    T temp = heap[ind];
+		    heap[ind] = heap[(ind * 2) + 2];
+		    heap[(ind * 2) + 2] = temp;
+		    ind = (ind * 2) + 2;
 		    
-// 		 }
-// 	     }
+		 }
+		 else{
+		     return res;
+		 }
+	     }
 	}
+
+
 	else{
 	     while(((ind * 2) + 1 < length) && (ind * 2) + 2 < length){
+		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) <= 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) <= 0)){
+		     return res;
+		 }
 		 if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) < 0)){
 		    T temp = heap[ind];
 		    heap[ind] = heap[(ind * 2) + 1];
 		    heap[(ind * 2) + 1] = temp;
 		    ind = (ind * 2) + 1;
+		    //  System.out.println(heap);
 		}
 		 
 		 else  if((heap[ind].compareTo(heap[(ind * 2) + 1]) < 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
@@ -115,10 +133,12 @@ public class MyHeap<T extends Comparable<T>>{
 		    heap[ind] = heap[(ind * 2) + 2];
 		    heap[(ind * 2) + 2] = temp;
 		    ind = (ind * 2) + 2;
+		    //  System.out.println(heap);
 		 }
 		 
 		 //	  if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0) && (heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
 		 else{
+		     
 		    if(heap[(ind * 2) + 1].compareTo(heap[(ind * 2) + 2]) <= 0){
 			T temp = heap[ind];
 			heap[ind] = heap[(ind * 2) + 1];
@@ -132,29 +152,44 @@ public class MyHeap<T extends Comparable<T>>{
 			 ind = (ind * 2) + 2;
 		    }
 		 }
+		 
+		 //	 System.out.println("ihae");
 	     }
-	     //  while(((ind * 2) + 1 >= length) && (ind * 2) + 2 < length){
-// 		  if((heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
-// 		    String temp = heap[ind];
-// 		    heap[ind] = heap[(ind * 2) + 2];
-// 		    heap[(ind * 2) + 2] = temp;
-// 		    ind = (ind * 2) + 2;
+	     // ind = 0;
+	      while(((ind * 2) + 1 >= length) && (ind * 2) + 2 < length){
+ 		  if((heap[ind].compareTo(heap[(ind * 2) + 2]) > 0)){
+		    T temp = heap[ind];
+		    heap[ind] = heap[(ind * 2) + 2];
+ 		    heap[(ind * 2) + 2] = temp;
+ 		    ind = (ind * 2) + 2;
 		  
-// 		   }
-// 	      }
-// 	       while(((ind * 2) + 1 < length) && (ind * 2) + 2 >= length){
-// 		   if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0)){
-// 		    String temp = heap[ind];
-// 		    heap[ind] = heap[(ind * 2) + 1];
-// 		    heap[(ind * 2) + 1] = temp;
-// 		    ind = (ind * 2) + 1;
-// 		   }
-// 	       }
+		  }
+		  else{
+		      return res;
+		  }
+		  
+		  //  System.out.println("yabb");
+	      }
+	      //   ind = 0;
+ 	       while(((ind * 2) + 1 < length) && (ind * 2) + 2 >= length){
+		   if((heap[ind].compareTo(heap[(ind * 2) + 1]) > 0)){
+		    T temp = heap[ind];
+		    heap[ind] = heap[(ind * 2) + 1];
+		    heap[(ind * 2) + 1] = temp;
+		    ind = (ind * 2) + 1;
+		   }
+		   else{
+		       return res;
+
+		   
+		   }
+	       }
+	
 	}
     
 
 	return res;
-    }
+	}
 			
 
 
@@ -187,16 +222,44 @@ public class MyHeap<T extends Comparable<T>>{
     /*	
     @SuppressWarnings("unchecked")
     public static void main(String[] args){
-	MyHeap ab = new MyHeap(false);
-	ab.add("ab");
+	MyHeap ab = new MyHeap(true);
+		ab.add(1);
+		ab.add(5);
+		ab.add(21);
+	       	ab.add(21);
 	//	ab.add("bc");
 	//  ab.add("ac");
-	  ab.remove();
-	  ab.add("zdgsh");
-	  ab.add("afaghaa");
+	//	  ab.remove();
+	  ab.add(25);
+	    ab.add(27);
+	 	  ab.add(28);
+		  ab.add(27);
+		 ab.add(27);
+		  ab.add(27);
+		//  ab.remove();
+	    ab.add(29);
+	    ab.add(21);
+	    ab.add(24);
+	    ab.add(23);
+	    ab.add(1);
+	    ab.add(0);
+	    ab.add(0);
+	    ab.add(0);
+	    //  System.out.println(ab);
+	       ab.remove();
+	   // System.out.println(ab);
+	     ab.remove();
+	    	ab.remove();
+	      ab.remove();
+	    	  ab.remove();
+		  	  ab.remove();
+		    ab.remove();
+		  	  ab.remove();
+		   ab.remove();
 	System.out.println(ab.toString());
 }
 }
-    
+
     */
-}
+} 
+    
