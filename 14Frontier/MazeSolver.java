@@ -18,13 +18,20 @@ public class MazeSolver{
     public boolean solve(int mode){
        	FrontierQueue que = new FrontierQueue();
        	 FrontierStack stacka = new FrontierStack();
+		 boolean aSearch = false;
 	  if(mode == 0){
 	  frontier = new FrontierQueue();
       }
-      else{
+      if(mode == 1){
 	  frontier = new FrontierStack();
       }
-
+	  if(mode == 2){
+		frontier = new FrontierPriorityQueue();
+	  }
+	  if(mode == 3){
+			frontier = new FrontierPriorityQueue();
+			aSearch = true;
+	  }
   frontier.add(maze.getStart());
        
 
@@ -48,16 +55,22 @@ public class MazeSolver{
       // return false;
     
 	  for(int i = 0; i < sub.length; i ++){
+		 // try{
 	      if(sub[i].getX() == maze.getEnd().getX() && sub[i].getY() == maze.getEnd().getY()){
 		  return true;
 	      }
+		  
+		  
 	      else{
 		  frontier.add(sub[i]);
 		  int xCordN = sub[i].getX();
 		  int yCordN = sub[i].getY();
 		  maze.set(xCordN,yCordN,'?');
 	      }
-	     
+			//System.out.println(maze.toString());
+		//  }
+	   //  catch(NullPointerException e){};
+	  
 	  }
 	  
     }
@@ -117,11 +130,12 @@ public class MazeSolver{
     return maze.toString();
   }
 
-
-
+}
+/*
 public static void main(String[] args){
-	MazeSolver x = new MazeSolver("input.txt");
+	MazeSolver x = new MazeSolver("input2.txt");
 	System.out.println(x.solve(0));
 	//	System.out.println(x);
     }
 }
+*/

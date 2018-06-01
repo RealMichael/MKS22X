@@ -8,6 +8,7 @@ public class Maze{
   private static final String SHOW_CURSOR =  "\033[?25h";
   Location start,end;
   private char[][]maze;
+  private boolean aSearch;
 
 
 
@@ -20,26 +21,35 @@ public class Maze{
  public Location[] getNeighbors(Location n){
      // Location[] storage = new Location[20];
       LinkedList<Location> ab = new LinkedList<>();
-      // int[] xCor = new int[4];
-      // int[] yCor = new int[4];
-     int[] xCor = {0,0,1,-1};
-      int[] yCor = {1,-1,0,0};
+	
+	  
+       int[] xCor = new int[] {0,0,1,-1};
+       int[] yCor = new int[]{1,-1,0,0};
+    
+	
+		
       int count = 0;
       for(int i = 0; i < 4; i ++){
-	  int xCount = n.getX() + xCor[i];
-	  int yCount = n.getY() + yCor[i];
-	  // if(checkInd(yCount,xCount)){
-	  if(xCount >= 0 && yCount >= 0 && xCount <  maze[0].length && yCount < maze.length){
-	  if(maze[xCount][yCount] == ' ' || maze[xCount][yCount] == 'E'){
-	      //  storage[i] = new Location(xCount,yCount,n);
+	 // int n.getX() + xCor[i] equals n.getX() + xCor[i];
+	 // int n.getY() + yCor[i] equals n.getY() + yCor[i];
+	  // if(checkInd(n.getY() + yCor[i],n.getX() + xCor[i])){
+	 if(n.getX() + xCor[i] >= 0 && n.getY() + yCor[i] >= 0 && n.getX() + xCor[i] <  maze.length && n.getY() + yCor[i] < maze[0].length){
+	  if(maze[n.getX() + xCor[i]][n.getY() + yCor[i]] == ' ' || maze[n.getX() + xCor[i]][n.getY() + yCor[i]] == 'E'){
+	      //  storage[i] = new Location(n.getX() + xCor[i],n.getY() + yCor[i],n);
 	      //   count ++;
-	      ab.add(new Location(xCount,yCount,n));
+		  if(aSearch == true){
+			ab.add(new Location(n.getX()+ xCor[i],n.getY() + yCor[i],n,end,start,n.getDisStart() + 1));
+		  }
+			else{
+	      ab.add(new Location(n.getX() + xCor[i],n.getY() + yCor[i],n,end));
+			}
 	  }
 	  }
       }
       Location[] storage = new Location[ab.size()];
-      for(int i = 0; i < ab.size(); i ++){
+      for(int i = 0; i < storage.length; i ++){
 	  storage[i] = ab.remove();
+	
 	  
       }
  
@@ -47,8 +57,8 @@ public class Maze{
       return storage;
  }
   
-
-
+  
+ 
 
     public boolean checkInd(int a, int b){
 	if(a >= 0 && a< maze[0].length && b >= 0 && b < maze.length){
@@ -127,8 +137,8 @@ public class Maze{
     The start/end Locations may need more information later when we add
     other kinds of frontiers!
     */
-    end = new Location(endr,endc,null);
-    start = new Location(startr,startc,null);
+    end = new Location(endr,endc,null,null);
+    start = new Location(startr,startc,null,null);
   }
 
   public String toStringColor(){
