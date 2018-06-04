@@ -57,6 +57,16 @@ public class MazeSolver{
 	  for(int i = 0; i < sub.length; i ++){
 		 // try{
 	      if(sub[i].getX() == maze.getEnd().getX() && sub[i].getY() == maze.getEnd().getY()){
+			//  Location temp = sub[i];
+			//  maze.set(sub[i].getX(), sub[i].getY(),'@');
+	      while(sub[i].getPrev() != maze.getStart()){
+			  sub[i] = sub[i].getPrev();
+		  //temp = temp.getPrev();
+		  maze.set(sub[i].getX(), sub[i].getY(),'@');
+		  //System.out.println(maze.toString());
+		  
+	      }
+		  
 		  return true;
 	      }
 		  
@@ -129,12 +139,12 @@ public class MazeSolver{
   public String toString(){
     return maze.toString();
   }
-
 }
+
 /*
 public static void main(String[] args){
-	MazeSolver x = new MazeSolver("input2.txt");
-	System.out.println(x.solve(0));
+	MazeSolver x = new MazeSolver("input.txt");
+	System.out.println(x.solve(2));
 	//	System.out.println(x);
     }
 }
